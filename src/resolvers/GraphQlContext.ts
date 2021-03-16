@@ -1,8 +1,8 @@
-import { Connection, IDatabaseDriver, MikroORM } from "@mikro-orm/core"
+import { Connection, EntityManager, IDatabaseDriver } from "@mikro-orm/core"
 
 export default class GraphQlContext {
-    public readonly Orm: MikroORM<IDatabaseDriver<Connection>>
-    public constructor(orm: MikroORM<IDatabaseDriver<Connection>>){
-        this.Orm = orm
+    public readonly EntityManager: EntityManager<any> & EntityManager<IDatabaseDriver<Connection>>
+    public constructor(em: EntityManager<any> & EntityManager<IDatabaseDriver<Connection>>){
+        this.EntityManager = em
     }
 }

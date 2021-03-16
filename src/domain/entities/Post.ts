@@ -4,7 +4,7 @@ import EntityValidationResult from "./EntityValidationResult";
 
 @ObjectType()
 @Entity()
-export class Post {
+export default class Post {
     @Field(() => Int)
     @PrimaryKey()
     id!: number
@@ -21,7 +21,7 @@ export class Post {
     @Property({ type: "text" })
     title!: string
 
-    Validate(): EntityValidationResult {
+    public Validate(): EntityValidationResult {
         let isValid: boolean = true
         const errors: string[] = []
 
