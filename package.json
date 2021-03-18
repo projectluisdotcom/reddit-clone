@@ -4,6 +4,9 @@
   "description": "A web reddit clone created with React, Typescript, GraphQL, Postgresql,  Mikro-ORM",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npm i --prefix ./server && npm i --prefix ./client",
+    "serve": "npm run serve --prefix ./server",
+    "watch": "npm run watch --prefix ./server",
     "compose": "docker-compose --env-file ./.env up"
   },
   "repository": {
