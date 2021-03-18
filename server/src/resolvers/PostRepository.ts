@@ -10,7 +10,7 @@ export default class PostRepository {
     }
 
     @Query(() => Post, { nullable: true })
-    async post(@Arg("id") id: number, @Ctx() ctx: GraphQlContext): Promise<Post | null> {
+    async post(@Arg("id") id: string, @Ctx() ctx: GraphQlContext): Promise<Post | null> {
         return await ctx.EntityManager.getRepository(Post).findOne({ id })
     }
 
@@ -28,7 +28,7 @@ export default class PostRepository {
     }
 
     @Mutation(() => Post, { nullable: true })
-    async update(@Arg("id") id: number, @Arg("title") title: string, @Ctx() ctx: GraphQlContext): Promise<Post | null> {
+    async update(@Arg("id") id: string, @Arg("title") title: string, @Ctx() ctx: GraphQlContext): Promise<Post | null> {
         const post = await ctx.EntityManager.getRepository(Post).findOne({ id })
         if(!post){
             return null
@@ -45,7 +45,7 @@ export default class PostRepository {
     }
 
     @Mutation(() => Boolean)
-    async delete(@Arg("id") id: number, @Ctx() ctx: GraphQlContext): Promise<boolean> {
+    async delete(@Arg("id") id: string, @Ctx() ctx: GraphQlContext): Promise<boolean> {
         try {
             await ctx.EntityManager.getRepository(Post).nativeDelete({ id })
             return true

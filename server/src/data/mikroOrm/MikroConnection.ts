@@ -8,4 +8,3 @@ export default class MikroConnection {
         return orm
     }
 }
-

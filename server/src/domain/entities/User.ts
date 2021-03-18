@@ -1,13 +1,13 @@
 import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, ObjectType } from "type-graphql";
 import EntityValidationResult from "./EntityValidationResult";
 
 @ObjectType()
 @Entity()
-export default class Post {
-    @Field(() => Int)
+export default class User {
+    @Field(() => String)
     @PrimaryKey()
-    id!: number
+    id!: string
 
     @Field(() => String)
     @Property({ type: "date" })

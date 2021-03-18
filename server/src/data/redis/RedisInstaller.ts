@@ -1,19 +1,20 @@
 import redis from "redis"
 import connectRedis from "connect-redis"
 import session from "express-session"
-import ISessionInstaller from "./ISessionInstaller"
 
-export default class RedisInstaller implements ISessionInstaller {
+export default class RedisInstaller {
     public constructor() {
     }
 
-    public Init(app: any, secretKey: string): void {
+    public Init(app: any, sessionSecret: string, sessionDbPassword: string): void {
         const RedisStore = connectRedis(session)
-        const redisClient = redis.createClient({})
+        const redisClient = redis.createClient({
+            password: sessionDbPassword
+        })
         app.use(
             session({
                 store: new RedisStore({ client: redisClient }),
-                secret: secretKey,
+                secret: sessionSecret,
                 resave: false,
             })
         )

@@ -4,7 +4,7 @@ class Env {
     public readonly Config: dotenv.DotenvParseOutput
 
     public constructor(){
-        const env = dotenv.config({ path: '.env' })
+        const env = dotenv.config({ path: '../.env' })
 
         if(env.error != null){
             console.error(`Env error ${env.error?.message}`)
