@@ -1,5 +1,5 @@
 import argon2 from 'argon2'
-import { IHashGenerator } from '../domain/IHashGenerator'
+import { IHashGenerator } from '../domain/abstraction/IHashGenerator'
 
 export default class Argon2Adapter implements IHashGenerator {
     async Hash(key: string): Promise<string> {

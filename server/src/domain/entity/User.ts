@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ObjectType } from "type-graphql";
-import EntityValidationResult from "./EntityValidationResult";
+import EntityValidationResult from "../result/EntityValidationResult";
 
 @ObjectType()
 @Entity()
@@ -19,15 +19,24 @@ export default class User {
 
     @Field(() => String)
     @Property({ type: "text" })
-    title!: string
+    username!: string
+
+    @Field(() => String)
+    @Property({ type: "text" })
+    password!: string
 
     public Validate(): EntityValidationResult {
         let isValid: boolean = true
         const errors: string[] = []
 
-        if(this.title === '' || this.title == null){
+        if(this.username === '' || this.username == null){
             isValid = false
-            errors.push("Title must be not empty or null")
+            errors.push("Username must be not empty or null")
+        }
+
+        if(this.password === '' || this.password == null){
+            isValid = false
+            errors.push("Password must be not empty or null")
         }
 
         return new EntityValidationResult(isValid, errors)

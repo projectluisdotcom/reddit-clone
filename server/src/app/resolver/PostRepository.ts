@@ -1,4 +1,4 @@
-import Post from "../domain/entities/Post";
+import Post from "../../domain/entity/Post";
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import GraphQlContext from "./GraphQlContext";
 

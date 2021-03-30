@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ObjectType } from "type-graphql";
-import EntityValidationResult from "./EntityValidationResult";
+import EntityValidationResult from "../result/EntityValidationResult";
 
 @ObjectType()
 @Entity()

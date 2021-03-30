@@ -6,7 +6,7 @@ export default class RedisInstaller {
     public constructor() {
     }
 
-    public Init(app: any, sessionSecret: string, sessionDbPassword: string): void {
+    public Init(app: any, sessionSecret: string | undefined, sessionDbPassword: string | undefined): void {
         const RedisStore = connectRedis(session)
         const redisClient = redis.createClient({
             password: sessionDbPassword

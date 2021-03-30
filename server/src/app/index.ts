@@ -1,13 +1,15 @@
-import MikroConnection from "./data/mikroOrm/MikroConnection"
+import MikroConnection from "../data/mikroOrm/MikroConnection"
 import express from 'express'
-import env from './Env'
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
-import PostRepository from "./resolvers/PostRepository"
-import UserRepository from "./resolvers/UserRepository"
-import GraphQlContext from "./resolvers/GraphQlContext"
-import Argon2Adapter from "./app/Argon2Adapter"
-import RedisInstaller from "./data/redis/RedisInstaller"
+import PostRepository from "./resolver/PostRepository"
+import UserRepository from "./resolver/UserRepository"
+import GraphQlContext from "./resolver/GraphQlContext"
+import Argon2Adapter from "./Argon2Adapter"
+import RedisInstaller from "../data/redis/RedisInstaller"
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const main = async () => {
     const hasher = new Argon2Adapter()
@@ -24,9 +26,9 @@ const main = async () => {
     })
 
     const app = express()
-    sessionInstaller.Init(app, env.Config.SESSION_SECRET, env.Config.SESSION_DB_PASSWORD)
+    sessionInstaller.Init(app, process.env.SESSION_SECRET, process.env.SESSION_DB_PASSWORD)
     apollo.applyMiddleware({ app })
-    app.listen(env.Config.PORT)
+    app.listen(process.env.PORT)
     console.log("Started")
 }
 
