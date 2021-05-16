@@ -1,0 +1,32 @@
+{
+  "commands": [
+    {
+      "login in psql using a db directly": {
+        "command": "psql -U {USER_NAME} -d {DB_NAME}"
+      }
+    }
+  ],
+  "sql": [
+    { "exits postgres": { "command": "\\q" } },
+    { "use db": { "command": "\\c {DB_NAME}", "example": "\\c some_db" } },
+    { "shows all the tables under a database": { "command": "\\dt" } },
+    { "shows all the tables under a database with extra metadata such as size": { "command": "\\dt+" } },
+    { "lists all the databases": { "command": "\\l" } },
+    {
+      "create table": {
+        "command": "CREATE TABLE IF NOT EXISTS table_name ( column1 datatype(length) column_contraint, table_constraints );",
+        "example": "CREATE TABLE IF NOT EXISTS accounts (user_id serial PRIMARY KEY, username VARCHAR(50) UNIQUE NOT NULL, password VARCHAR(50) NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, created_on TIMESTAMP NOT NULL, last_login TIMESTAMP );"
+      }
+    },
+    {
+      "describe table": {
+        "command": "SELECT table_name, column_name, data_type FROM information_schema.columns WHERE table_name = '{TABLE_NAME}';"
+      }
+    },
+    {
+      "insert data": {
+        "command": "INSERT INTO  accounts VALUES(1, 'luis', 'pass123', 'luis@email.com', '1971-07-13', '1971-07-13');"
+      }
+    }
+  ]
+}

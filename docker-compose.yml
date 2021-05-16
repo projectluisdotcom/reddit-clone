@@ -1,28 +1,27 @@
 version: "3.9"
 
 services:
-
-  database-1:
+  database:
     image: "postgres"
-    restart: true
+    restart: always
     ports:
-     - $DB_PORT:$DB_PORT
-    environment: 
-      PGDATABASE=$DB_NAME
-      PGUSER=$DB_USER
-      PGPASSWORD=$DB_PASSWORD
-      PGPORT=$DB_PORT
-    volumes:
-      - $PWD/database-data:/var/lib/postgresql/data/
-
-  session-cache-1:
-    image: "redis:alpine"
-    restart: true
-    command: redis-server --requirepass $SESSION_DB_PASSWORD --port $SESSION_DB_PORT
-    ports:
-     - $SESSION_DB_PORT:$SESSION_DB_PORT
+      - "${DB_PORT}:${DB_PORT}"
     environment:
-      SESSION_DB_PASSWORD=$SESSION_DB_PASSWORD
-      SESSION_DB_PORT=$SESSION_DB_PORT
+      POSTGRES_DATABASE: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_PORT: ${DB_PORT}
     volumes:
-      - $PWD/redis-data:/bitnami/redis/data
+      - ${PWD}/volumes/database-data:/var/lib/postgresql/data/
+
+  session-cache:
+    image: "redis:alpine"
+    restart: always
+    command: redis-server --requirepass ${SESSION_DB_PASSWORD} --port ${SESSION_DB_PORT}
+    ports:
+      - "${SESSION_DB_PORT}:${SESSION_DB_PORT}"
+    environment:
+      SESSION_DB_PASSWORD: ${SESSION_DB_PASSWORD}
+      SESSION_DB_PORT: ${SESSION_DB_PORT}
+    volumes:
+      - ${PWD}/volumes/session-cache-data:/bitnami/redis/data

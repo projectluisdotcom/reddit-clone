@@ -7,7 +7,9 @@
     "preinstall": "npm i --prefix ./server && npm i --prefix ./client",
     "serve": "npm run serve --prefix ./server",
     "watch": "npm run watch --prefix ./server",
-    "compose": "docker-compose --env-file ./.env up"
+    "compose": "docker-compose --env-file ./.env up",
+    "t:connectdb": "set -o allexport; source .env; set +o allexport & docker exec -it reddit-clone_database_1 psql -U ${DB_USER} -d ${DB_NAME}",
+    "t:importdotenv": "set -o allexport; source .env; set +o allexport & echo ${DB_NAME}"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/rescodeio/reddit-clone/issues"
   },
-  "homepage": "https://github.com/rescodeio/reddit-clone#readme"
+  "homepage": "https://github.com/rescodeio/reddit-clone#readme",
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
+  }
 }

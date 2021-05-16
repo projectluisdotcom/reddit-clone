@@ -80,3 +80,6 @@ typings/
 
 # React compiled files
 dist/
+
+# Docker volumes
+volumes/
