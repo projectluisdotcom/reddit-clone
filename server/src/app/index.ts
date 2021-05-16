@@ -19,6 +19,7 @@ const main = async () => {
 
   const apollo = new ApolloServer({
     schema: await buildSchema({
+      // TODO: Try to read a directory instead of adding here classes one by one
       resolvers: [PostRepository, UserRepository],
       validate: false,
     }),
@@ -29,7 +30,7 @@ const main = async () => {
   sessionInstaller.Init(app, process.env.SESSION_SECRET, process.env.SESSION_DB_PASSWORD);
   apollo.applyMiddleware({ app });
   app.listen(process.env.PORT);
-  console.log("Started");
+  console.log(`Started on port ${process.env.PORT}, check http://localhost:${process.env.PORT}/graphql`);
 };
 
 main().catch((e) => console.error(e));
