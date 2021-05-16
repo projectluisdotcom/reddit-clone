@@ -8,6 +8,7 @@
     "serve": "npm run serve --prefix ./server",
     "watch": "npm run watch --prefix ./server",
     "compose": "docker-compose --env-file ./.env up",
+    "migration:create": "npm run --prefix ./server migration:create",
     "t:connectdb": "set -o allexport; source .env; set +o allexport & docker exec -it reddit-clone_database_1 psql -U ${DB_USER} -d ${DB_NAME}",
     "t:connectcache": "set -o allexport; source .env; set +o allexport & docker exec -it reddit-clone_session-cache_1 redis-cli -a ${SESSION_DB_PASSWORD}",
     "t:importdotenv": "set -o allexport; source .env; set +o allexport & echo ${DB_NAME}"

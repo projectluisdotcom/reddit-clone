@@ -5,8 +5,6 @@ import path from "path";
 import dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
 
-console.log(process.env.DB_TYPE);
-
 export default {
   migrations: {
     path: path.join(__dirname, "../migrations"),

@@ -3,6 +3,7 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import PostRepository from "./resolver/PostRepository";
+import UserRepository from "./resolver/UserRepository";
 import GraphQlContext from "./resolver/GraphQlContext";
 import Argon2Adapter from "./Argon2Adapter";
 import RedisInstaller from "../data/redis/RedisInstaller";
@@ -18,7 +19,7 @@ const main = async () => {
 
   const apollo = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PostRepository /*, UserRepository*/],
+      resolvers: [PostRepository, UserRepository],
       validate: false,
     }),
     context: () => new GraphQlContext(orm.em, hasher),

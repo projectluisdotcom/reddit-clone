@@ -20,6 +20,7 @@ export default class RedisInstaller {
         store: new RedisStore({ client: redisClient }),
         secret: sessionSecret,
         resave: false,
+        saveUninitialized: false,
       })
     );
   }
