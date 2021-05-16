@@ -1,6 +1,7 @@
 import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ObjectType } from "type-graphql";
 import EntityValidationResult from "../kernel/EntityValidationResult";
+import FieldError from "../kernel/FieldError";
 
 @ObjectType()
 @Entity()
@@ -27,16 +28,22 @@ export default class User {
 
   public Validate(): EntityValidationResult {
     let isValid: boolean = true;
-    const errors: string[] = [];
+    const errors: FieldError[] = [];
 
     if (this.username === "" || this.username == null) {
       isValid = false;
-      errors.push("Username must be not empty or null");
+      errors.push({
+        field: "username",
+        message: "Username must be not empty or null",
+      });
     }
 
     if (this.password === "" || this.password == null) {
       isValid = false;
-      errors.push("Password must be not empty or null");
+      errors.push({
+        field: "password",
+        message: "Password must be not empty or null",
+      });
     }
 
     return new EntityValidationResult(isValid, errors);
