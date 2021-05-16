@@ -1,0 +1,15 @@
+{
+  "bash": [
+    {
+      "login in redis": {
+        "command": "redis-cli [-h host.domain.com] [-p 1234] [-a yourpassword]"
+      }
+    }
+  ],
+  "redis": [
+    { "get": { "command": "GET '${key}'" } },
+    { "set": { "command": "SET '${key}' '${value}'" } },
+    { "set with expire": { "command": "SET 'will expire in 60s' '${value}' [EX 60]" } },
+    { "exit": { "command": "exit" } }
+  ]
+}
